@@ -49,13 +49,6 @@ const listCategoryService = async (id) => {
 
 const updateCategoryService = async (id, name) => {
   try {
-    // const categoryId = await database.query("SELECT id FROM categories;")
-    // const idExists = categoryId.rows.find((row) => row.id === id)
-
-    // if (idExists === undefined) {
-    //   throw "Category not found"
-    // }
-
     const res = await database.query(
       "UPDATE categories SET name = $1 WHERE id = $2 RETURNING *",
       [name, id]
@@ -73,13 +66,6 @@ const updateCategoryService = async (id, name) => {
 
 const deleteCategoryService = async (id) => {
   try {
-    // const categoryId = await database.query("SELECT id FROM categories;")
-    // const idExists = categoryId.rows.find((row) => row.id === id)
-
-    // if (idExists === undefined) {
-    //   throw "Category not found"
-    // }
-
     const res = await database.query(
       "DELETE FROM categories WHERE id = $1 RETURNING *",
       [id]
