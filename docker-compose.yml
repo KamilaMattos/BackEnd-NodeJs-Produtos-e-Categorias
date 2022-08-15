@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  api:
+    container_name: api_entrega
+    image: api_entrega
+    build: .
+    ports:
+      - 3333:3333
+    environment:
+      - DB_USER=kamil
+      - DB_PASSWORD=1234
+      - DB_HOST=db
+      - DB=products_management
+
+    depends_on:
+      - db
+
+    volumes:
+      - .:/app
+  db:
+    container_name: db
+    image: postgres:latest
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=kamil
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=products_management
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kamil -d products_management"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    volumes:
+      - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - db_entrega:/var/lib/postgresql/data
+volumes:
+  db_entrega:
+    driver: local
