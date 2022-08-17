@@ -7,7 +7,7 @@ const createCategoryService = async (name) => {
       [name]
     )
     if (checkCategoryExists.rows.length > 0) {
-      throw new Error(err)
+      throw new Error(error)
     }
 
     const res = await database.query(
@@ -16,8 +16,8 @@ const createCategoryService = async (name) => {
     )
 
     return { message: "Category created", category: res.rows[0] }
-  } catch (err) {
-    throw new Error(err)
+  } catch (error) {
+    throw new Error(error)
   }
 }
 
@@ -26,8 +26,8 @@ const listCategoriesService = async () => {
     const res = await database.query("SELECT name FROM categories")
 
     return res.rows
-  } catch (err) {
-    throw new Error(err)
+  } catch (error) {
+    throw new Error(error)
   }
 }
 
@@ -76,7 +76,7 @@ const deleteCategoryService = async (id) => {
     }
     return { message: "category deleted", category: res.rows[0] }
   } catch (error) {
-    throw new Error(err)
+    throw new Error(error)
   }
 }
 

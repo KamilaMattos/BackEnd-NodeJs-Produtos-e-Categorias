@@ -39,14 +39,14 @@ const listProductController = async (req, res) => {
   }
 }
 
-const updateProductController = async (req, resp) => {
+const updateProductController = async (req, res) => {
   try {
     const { id } = req.params
     const data = req.body
     const product = await updateProductService(id, data)
-    return resp.status(200).json(product)
+    return res.status(200).json(product)
   } catch (error) {
-    return resp.status(400).json({ message: error.message })
+    return res.status(400).json({ message: error.message })
   }
 }
 

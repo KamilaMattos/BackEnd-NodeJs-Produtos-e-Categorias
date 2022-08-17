@@ -12,7 +12,7 @@ const createCategoryController = async (req, res) => {
     const category = await createCategoryService(name)
 
     return res.status(201).json(category)
-  } catch (err) {
+  } catch (error) {
     return res.status(400).json({ message: "Category Already Exists!" })
   }
 }
